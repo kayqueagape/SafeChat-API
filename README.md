@@ -44,41 +44,27 @@ SafeChat is a high-security backend application that combines **Biometric Facial
 1. Clone the repository:
    ```bash
    git clone [https://github.com/your-username/safechat-api.git](https://github.com/your-username/safechat-api.git)
+   
+2. Install dependencies:
+   ```bash
+   git clone [https://github.com/your-username/safechat-api.git](https://github.com/your-username/safechat-api.git)
 
-Install dependencies:
-Bash
-npm install
+3. Set up your .env file (copy from .env.example):
+   ```bash
+   git clone [https://github.com/your-username/safechat-api.git](https://github.com/your-username/safechat-api.git)
 
-Set up your .env file (copy from .env.example):
+4. Run migrations:
+   ```bash
+   npx prisma migrate dev
+   
+5. Start the server:
+   ```Bash
+   npm run dev
 
-Bash
-
-cp .env.example .env
-Run migrations:
-
-Bash
-
-npx prisma migrate dev
-Start the server:
-
-Bash
-
-npm run dev
 📖 API Documentation
 Once the server is running, you can access the interactive Swagger documentation at: http://localhost:3000/api-docs
 
 📝 License
 This project is under the MIT License.
 
-Developed with ⚡ by [Your Name]
-
-
----
-
-### 💡 Dicas para valorizar o README:
-
-1.  **Prints/Gifs:** Quando o projeto estiver rodando, tire um print da tela do Swagger (documentação) e uma captura do log do terminal ou do chat funcionando. Adicione no README. Isso prova que o código funciona.
-2.  **Link do LinkedIn:** No final, coloque o link para o seu perfil do LinkedIn.
-3.  **Variáveis de Ambiente:** Não esqueça de criar um arquivo `.env.example` no seu projeto (sem as senhas reais) para que o recrutador saiba quais chaves o projeto precisa para rodar.
-
-**Quer que eu te ajude a criar o código inicial do servidor em Node.js com TypeScript para começar a estrutura?**
+Developed with ⚡ by [kayque-agape]
