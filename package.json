@@ -21,6 +21,7 @@
   "homepage": "https://github.com/kayqueagape/SafeChat-API#readme",
   "dependencies": {
     "express": "^5.2.1",
+    "face-api.js": "^0.22.2",
     "mysql2": "^3.16.1",
     "sequelize": "^6.37.7",
     "socket.io": "^4.8.3"
