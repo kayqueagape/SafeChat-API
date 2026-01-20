@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/kayqueagape/SafeChat-API#readme",
   "dependencies": {
+    "@vladmandic/face-api": "^1.7.15",
+    "canvas": "^3.2.1",
+    "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "face-api.js": "^0.22.2",
+    "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.16.1",
     "sequelize": "^6.37.7",
     "socket.io": "^4.8.3"
