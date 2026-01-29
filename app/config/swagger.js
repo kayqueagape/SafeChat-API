@@ -34,7 +34,7 @@ const options = {
         User: {
           type: 'object',
           properties: {
-            id: { type: 'integer' },
+            id: { type: 'string' },
             username: { type: 'string' },
             email: { type: 'string' },
             createdAt: { type: 'string', format: 'date-time' },
@@ -44,7 +44,7 @@ const options = {
         Room: {
           type: 'object',
           properties: {
-            id: { type: 'integer' },
+            id: { type: 'string' },
             name: { type: 'string' },
             description: { type: 'string' },
             isPrivate: { type: 'boolean' },
@@ -55,10 +55,10 @@ const options = {
         Message: {
           type: 'object',
           properties: {
-            id: { type: 'integer' },
+            id: { type: 'string' },
             content: { type: 'string' },
-            userId: { type: 'integer' },
-            roomId: { type: 'integer' },
+            userId: { type: 'string' },
+            roomId: { type: 'string' },
             createdAt: { type: 'string', format: 'date-time' }
           }
         },
