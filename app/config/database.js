@@ -7,7 +7,7 @@ export async function connectDatabase() {
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
-    console.error('❌ Missing MONGODB_URI in environment variables');
+    console.error('missigin MONGODB_URI in environment variables');
     process.exit(1);
   }
 
@@ -16,9 +16,9 @@ export async function connectDatabase() {
     await mongoose.connect(uri, {
       autoIndex: process.env.NODE_ENV !== 'production',
     });
-    console.log('✅ MongoDB connected successfully');
+    console.log(' MongoDB connected successfully');
   } catch (error) {
-    console.error('❌ MongoDB connection error:', error);
+    console.error(' MongoDB connection error:', error);
     process.exit(1);
   }
 }
