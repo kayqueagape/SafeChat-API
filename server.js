@@ -9,6 +9,9 @@ import swaggerUi from 'swagger-ui-express';
 // Load environment variables
 dotenv.config();
 
+// Connect database
+import { connectDatabase } from './app/config/database.js';
+
 // Import routes
 import authRoutes from './app/routes/auth.js';
 import roomsRoutes from './app/routes/rooms.js';
@@ -28,6 +31,12 @@ import { loadModels } from './app/utils/faceRecognition.js';
 const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 3000;
+
+// Connect to MongoDB
+connectDatabase().catch((error) => {
+  console.error('Failed to connect to MongoDB:', error);
+  process.exit(1);
+});
 
 // Security middleware
 app.use(helmet());

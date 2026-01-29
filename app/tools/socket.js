@@ -1,6 +1,7 @@
 import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
-import prisma from '../config/database.js';
+import mongoose from 'mongoose';
+import User from '../models/User.js';
 import roomRepository from '../repositories/roomRepository.js';
 import messageRepository from '../repositories/messageRepository.js';
 
@@ -18,20 +19,23 @@ async function authenticateSocket(socket, next) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
     // Fetch user
-    const user = await prisma.user.findUnique({
-      where: { id: decoded.id },
-      select: {
-        id: true,
-        username: true,
-        email: true
-      }
-    });
+    if (!mongoose.isValidObjectId(decoded.id)) {
+      return next(new Error('Authentication error: Invalid token'));
+    }
+
+    const user = await User.findById(decoded.id)
+      .select({ username: 1, email: 1 })
+      .lean();
 
     if (!user) {
       return next(new Error('Authentication error: User not found'));
     }
 
-    socket.user = user;
+    socket.user = {
+      id: String(user._id),
+      username: user.username,
+      email: user.email,
+    };
     next();
   } catch (error) {
     next(new Error('Authentication error: Invalid token'));

@@ -5,19 +5,12 @@
 export const errorHandler = (err, req, res, next) => {
   console.error('Error:', err);
 
-  // Prisma errors
-  if (err.code === 'P2002') {
+  // Mongo duplicate key error
+  if (err?.code === 11000) {
     return res.status(409).json({
       success: false,
       message: 'Duplicate entry. This record already exists.',
-      error: err.meta?.target || 'unknown'
-    });
-  }
-
-  if (err.code === 'P2025') {
-    return res.status(404).json({
-      success: false,
-      message: 'Record not found.'
+      error: err.keyValue || 'duplicate_key'
     });
   }
 

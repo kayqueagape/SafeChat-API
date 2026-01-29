@@ -2,31 +2,48 @@
   "name": "safechat-api",
   "version": "1.0.0",
   "description": "SafeChat is a high-security backend application that combines **Biometric Facial Authentication** with **Real-Time Messaging**. It was developed to demonstrate a robust architecture for sensitive communications, ensuring that only verified users can access specific chat environments.",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kayqueagape/SafeChat-API.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "chat",
+    "websocket",
+    "faceid",
+    "biometric",
+    "authentication",
+    "real-time"
+  ],
+  "author": "kayque-agape",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/kayqueagape/SafeChat-API/issues"
   },
   "homepage": "https://github.com/kayqueagape/SafeChat-API#readme",
   "dependencies": {
     "@vladmandic/face-api": "^1.7.15",
+    "bcrypt": "^5.1.1",
     "canvas": "^3.2.1",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.3",
-    "mysql2": "^3.16.1",
-    "sequelize": "^6.37.7",
-    "socket.io": "^4.8.3"
+    "mongoose": "^8.10.0",
+    "socket.io": "^4.8.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }

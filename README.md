@@ -10,61 +10,203 @@ SafeChat is a high-security backend application that combines **Biometric Facial
 * **Real-Time Chat:** Low-latency messaging system using WebSockets for instant communication.
 * **Private Rooms:** Logic for isolated chat rooms, ensuring data privacy between different support sessions.
 * **JWT Security:** Secure session management using JSON Web Tokens.
-* **Data Validation:** Strict input validation to prevent SQL Injection and malformed data.
-* **API Documentation:** Interactive documentation for easy frontend integration.
+* **Data Validation:** Strict input validation using Zod to prevent SQL Injection and malformed data.
+* **API Documentation:** Interactive Swagger/OpenAPI documentation for easy frontend integration.
 
 ## 🛠️ Tech Stack
 
-* **Runtime:** [Node.js](https://nodejs.org/) (LTS)
-* **Language:** [TypeScript](https://www.typescriptlang.org/)
-* **Framework:** [Express.js](https://expressjs.com/) or [Fastify](https://www.fastify.io/)
+* **Runtime:** [Node.js](https://nodejs.org/) (v18+)
+* **Language:** JavaScript (ES Modules)
+* **Framework:** [Express.js](https://expressjs.com/)
 * **Real-time:** [Socket.io](https://socket.io/)
-* **ORM:** [Prisma](https://www.prisma.io/)
-* **Database:** [PostgreSQL](https://www.postgresql.org/)
+* **Database:** [MongoDB](https://www.mongodb.com/)
+* **ODM:** [Mongoose](https://mongoosejs.com/)
 * **Documentation:** [Swagger/OpenAPI](https://swagger.io/)
 * **Validation:** [Zod](https://zod.dev/)
+* **Face Recognition:** [@vladmandic/face-api](https://github.com/vladmandic/face-api)
 
 ---
 
 ## 🏗️ Architectural Highlights
 
-1.  **Middleware Pattern:** Global error handling and authentication guards for protected routes.
-2.  **Repository Pattern:** Decoupling business logic from database access for better testability.
-3.  **Scalable WebSockets:** Structured event handling for chat rooms and user presence.
+1. **Middleware Pattern:** Global error handling and authentication guards for protected routes.
+2. **Repository Pattern:** Decoupling business logic from database access for better testability.
+3. **Scalable WebSockets:** Structured event handling for chat rooms and user presence.
+4. **Security First:** Helmet.js, CORS, rate limiting, and JWT authentication.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-* Node.js installed (v18+)
-* Docker or a local PostgreSQL instance
+
+* Node.js installed (v18 or higher)
+* MongoDB database (local or Docker)
+* npm or yarn package manager
 
 ### Installation
-1. Clone the repository:
-   ```bash
-   git clone [https://github.com/your-username/safechat-api.git](https://github.com/your-username/safechat-api.git)
-   
-2. Install dependencies:
-   ```bash
-   git clone [https://github.com/your-username/safechat-api.git](https://github.com/your-username/safechat-api.git)
 
-3. Set up your .env file (copy from .env.example):
+1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/safechat-api.git](https://github.com/your-username/safechat-api.git)
+   git clone https://github.com/kayqueagape/SafeChat-API.git
+   cd SafeChat-API
+   ```
 
-4. Run migrations:
+2. **Install dependencies:**
    ```bash
-   npx prisma migrate dev
+   npm install
+   ```
+
+3. **Set up your environment variables:**
+   ```bash
+   cp .env.example .env
+   ```
    
-5. Start the server:
-   ```Bash
+   Edit `.env` and configure:
+   - `MONGODB_URI`: Your MongoDB connection string
+   - `JWT_SECRET`: A strong secret key for JWT tokens
+   - `PORT`: Server port (default: 3000)
+   - `FACE_RECOGNITION_THRESHOLD`: Face matching threshold (default: 0.6)
+
+4. **Set up the database:**
+   Make sure MongoDB is running and accessible via `MONGODB_URI`.
+
+5. **Start the development server:**
+   ```bash
    npm run dev
+   ```
 
-📖 API Documentation
-Once the server is running, you can access the interactive Swagger documentation at: http://localhost:3000/api-docs
+The server will start on `http://localhost:3000` (or your configured PORT).
 
-📝 License
+---
+
+## 📖 API Documentation
+
+Once the server is running, you can access the interactive Swagger documentation at:
+
+**http://localhost:3000/api-docs**
+
+The documentation includes:
+- All available endpoints
+- Request/response schemas
+- Authentication requirements
+- Example requests and responses
+
+---
+
+## 🔐 API Endpoints
+
+### Authentication
+
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login with email and password
+- `POST /api/auth/face-register` - Register face descriptor (requires authentication)
+- `POST /api/auth/face-login` - Login with face recognition
+- `GET /api/auth/me` - Get current user (requires authentication)
+
+### Rooms
+
+- `POST /api/rooms` - Create a new room (requires authentication)
+- `GET /api/rooms` - Get all rooms for current user (requires authentication)
+- `GET /api/rooms/:id` - Get room by ID (requires authentication)
+- `POST /api/rooms/:id/join` - Join a room (requires authentication)
+- `POST /api/rooms/:id/leave` - Leave a room (requires authentication)
+- `GET /api/rooms/:id/messages` - Get messages for a room (requires authentication)
+
+### WebSocket Events
+
+**Client → Server:**
+- `join_room` - Join a chat room
+- `leave_room` - Leave a chat room
+- `send_message` - Send a message to a room
+- `typing` - Indicate user is typing
+- `stop_typing` - Indicate user stopped typing
+
+**Server → Client:**
+- `joined_room` - Confirmation of joining a room
+- `user_joined` - Notification that a user joined
+- `user_left` - Notification that a user left
+- `new_message` - New message received
+- `user_typing` - User is typing indicator
+- `user_stopped_typing` - User stopped typing indicator
+- `error` - Error message
+
+---
+
+## 🔒 Security Features
+
+- **JWT Authentication:** Secure token-based authentication
+- **Password Hashing:** Bcrypt for password security
+- **Face Recognition:** Biometric authentication using facial descriptors
+- **Rate Limiting:** Protection against brute force attacks
+- **Helmet.js:** Security headers
+- **CORS:** Configurable cross-origin resource sharing
+- **Input Validation:** Zod schemas for all inputs
+- **SQL Injection Protection:** Prisma ORM prevents SQL injection
+
+---
+
+## 📁 Project Structure
+
+```
+SafeChat-API/
+├── app/
+│   ├── config/          # Configuration files
+│   │   ├── database.js   # Prisma client
+│   │   └── swagger.js    # Swagger configuration
+│   ├── middleware/       # Express middleware
+│   │   ├── auth.js       # Authentication middleware
+│   │   └── errorHandler.js # Error handling
+│   ├── models/           # Face recognition models
+│   │   └── faceid/       # Face API model files
+│   ├── repositories/     # Data access layer (Repository Pattern)
+│   │   ├── userRepository.js
+│   │   ├── roomRepository.js
+│   │   └── messageRepository.js
+│   ├── routes/           # API routes
+│   │   ├── auth.js       # Authentication routes
+│   │   └── rooms.js      # Room management routes
+│   ├── tools/            # Utilities
+│   │   └── socket.js     # Socket.io configuration
+│   └── utils/            # Helper functions
+│       ├── faceRecognition.js # Face recognition utilities
+│       ├── jwt.js        # JWT utilities
+│       └── validation.js # Zod validation schemas
+├── prisma/
+│   └── schema.prisma     # Database schema
+├── server.js             # Main server file
+├── .env.example          # Environment variables template
+└── package.json
+```
+
+---
+
+## 🧪 Testing
+
+To test the API:
+
+1. Start the server: `npm run dev`
+2. Access Swagger UI: `http://localhost:3000/api-docs`
+3. Use the interactive documentation to test endpoints
+
+---
+
+## 📝 License
+
 This project is under the MIT License.
 
-Developed with ⚡ by [kayque-agape]
+---
+
+## 👨‍💻 Developed with ⚡ by [kayque-agape](https://github.com/kayqueagape)
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+## 📧 Support
+
+For issues and questions, please open an issue on [GitHub](https://github.com/kayqueagape/SafeChat-API/issues).

@@ -70,7 +70,7 @@ router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user.id;
 
-    const room = await roomRepository.findById(parseInt(id));
+    const room = await roomRepository.findById(id);
 
     if (!room) {
       return res.status(404).json({
@@ -106,7 +106,7 @@ router.post('/:id/join', async (req, res, next) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
-    const roomId = parseInt(id);
+    const roomId = id;
 
     // Check if room exists
     const room = await roomRepository.findById(roomId);
@@ -147,7 +147,7 @@ router.post('/:id/leave', async (req, res, next) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
-    const roomId = parseInt(id);
+    const roomId = id;
 
     // Check if room exists
     const room = await roomRepository.findById(roomId);
@@ -188,9 +188,9 @@ router.get('/:id/messages', async (req, res, next) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
-    const roomId = parseInt(id);
+    const roomId = id;
     const limit = parseInt(req.query.limit) || 50;
-    const cursor = req.query.cursor ? parseInt(req.query.cursor) : null;
+    const cursor = req.query.cursor ? String(req.query.cursor) : null;
 
     // Check if room exists
     const room = await roomRepository.findById(roomId);
