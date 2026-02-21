@@ -194,19 +194,3 @@ To test the API:
 ## 📝 License
 
 This project is under the MIT License.
-
----
-
-## 👨‍💻 Developed with ⚡ by [kayque-agape](https://github.com/kayqueagape)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
----
-
-## 📧 Support
-
-For issues and questions, please open an issue on [GitHub](https://github.com/kayqueagape/SafeChat-API/issues).
