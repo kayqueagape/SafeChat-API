@@ -172,8 +172,6 @@ SafeChat-API/
 │       ├── faceRecognition.js # Face recognition utilities
 │       ├── jwt.js        # JWT utilities
 │       └── validation.js # Zod validation schemas
-├── prisma/
-│   └── schema.prisma     # Database schema
 ├── server.js             # Main server file
 ├── .env.example          # Environment variables template
 └── package.json
