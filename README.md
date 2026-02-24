@@ -78,6 +78,9 @@ SafeChat is a high-security backend application that combines **Biometric Facial
 
 The server will start on `http://localhost:3000` (or your configured PORT).
 
+![The server is running]<img width="2256" height="373" alt="Screenshot_1" src="https://github.com/user-attachments/assets/88f2fdbe-0606-4542-be8c-e47f57eaa892" />
+
+
 ---
 
 ## 📖 API Documentation
